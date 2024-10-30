@@ -17,12 +17,5 @@ ro.crypto.metadata.enabled=true
 ro.crypto.support_metadata_encrypt=true
 ro.crypto.uses_fs_ioc_add_encryption_key=true
 
-# USB and MTP Configuration
-ro.sys.usb.storage.type=mtp
-ro.sys.usb.mtp.whql.enable=0
-
 # Dynamic Partitions
 ro.boot.dynamic_partitions=true
-
-# Debugging (if needed)
-ro.debuggable=1
