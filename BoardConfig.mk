@@ -137,6 +137,7 @@ TW_INCLUDE_TZDATA := true
 TW_EXCLUDE_APEX := true
 TW_HAS_NO_RECOVERY_PARTITION := true
 TARGET_NO_RECOVERY := true
+TW_HAS_MTP := true
 
 # Making sure recovery build don't have kernel in it--well, no kernel at all in tree anyway... LOL!
 BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
