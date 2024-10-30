@@ -2,6 +2,8 @@ import /init.microtrust.rc
 
 on init
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw:/system/lib64/hw
+    chown system system /dev/xiaomi-touch
+    chmod 0664 /dev/xiaomi-touch
 
 on post-fs
     # Support A/B feature for EMMC and UFS boot region
@@ -103,6 +105,12 @@ service insmod_sh /vendor/bin/init.insmod.sh /vendor/etc/init.insmod.mt6768.cfg
     group root system
     disabled
     oneshot
+
+service touchfeature-hal-1-0 /vendor/bin/hw/vendor.xiaomi.hardware.touchfeature@1.0-service
+    class main
+    user system
+    group system system
+    onrestart restart touchfeature-hal-1-0
 
 on early-init
     setprop vendor.all.modules.ready 0
