@@ -97,6 +97,17 @@ service keystore /system/bin/keystore /tmp/misc/keystore
     disabled
     seclabel u:r:recovery:s0    
 
+service insmod_sh /vendor/bin/init.insmod.sh /vendor/etc/init.insmod.mt6768.cfg
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+
+on early-init
+    setprop vendor.all.modules.ready 0
+    start insmod_sh
+
 # We need vold early for metadata encryption
 on early-fs
     start vold
