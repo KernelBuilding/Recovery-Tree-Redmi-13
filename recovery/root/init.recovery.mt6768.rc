@@ -2,8 +2,6 @@ import /init.microtrust.rc
 
 on init
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw:/system/lib64/hw
-    chown system system /dev/xiaomi-touch
-    chmod 0664 /dev/xiaomi-touch
 
 on post-fs
     # Support A/B feature for EMMC and UFS boot region
@@ -50,7 +48,6 @@ service keymaster-4-1 /vendor/bin/android.hardware.keymaster@4.1-service.beanpod
 
 on property:hwservicemanager.ready=true
     start keystore
-    start teei_daemon
     start keymaster-4-1
     start gatekeeper-1-0
     
@@ -97,24 +94,7 @@ service keystore /system/bin/keystore /tmp/misc/keystore
     user root
     group root drmrpc readproc log
     disabled
-    seclabel u:r:recovery:s0    
-
-service insmod_sh /vendor/bin/init.insmod.sh /vendor/etc/init.insmod.mt6768.cfg
-    class main
-    user root
-    group root system
-    disabled
-    oneshot
-
-service touchfeature-hal-1-0 /vendor/bin/hw/vendor.xiaomi.hardware.touchfeature@1.0-service
-    class main
-    user system
-    group system system
-    onrestart restart touchfeature-hal-1-0
-
-on early-init
-    setprop vendor.all.modules.ready 0
-    start insmod_sh
+    seclabel u:r:recovery:s0
 
 # We need vold early for metadata encryption
 on early-fs
@@ -122,8 +102,3 @@ on early-fs
 
     # Mount RW partitions which need run fsck
     mount_all /first_stage_ramdisk/fstab.mt6768 --late
-
-on init
-    setprop sys.usb.configfs 1
-    setprop sys.usb.controller "musb-hdrc"
-    setprop sys.usb.ffs.aio_compat 1
