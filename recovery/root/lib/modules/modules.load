@@ -15,6 +15,7 @@ clkchk-mt6768.ko
 clkdbg-mt6768.ko
 mt6768_clkmgr.ko
 clk-fmeter-mt6768.ko
+focaltech_tp.ko
 mtk-scpsys.ko
 mtk-scpsys-mt6768.ko
 mtk-scpsys-bringup.ko
